@@ -12,7 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import static org.springframework.util.Assert.*;
+
+import static org.springframework.util.Assert.notNull;
 
 /**
  * This Elevator class reads instruction from input file,
@@ -25,30 +26,37 @@ public class Elevator {
     private List<Command> commands = new ArrayList<>();
     private final int topFloor;
     private final int groundFloor;
+    public static final String INSTRUCTION_FILE = "input.txt";
     private final Logger LOG=Logger.getLogger(Elevator.class.getName());
 
-    public Elevator(final Controller elevatorController, final int topFloor, final int groundFloor) {
-        this.controller = elevatorController;
+    public Elevator(final Controller controller, final int topFloor, final int groundFloor) {
+        this.controller = controller;
         this.topFloor = topFloor;
         this.groundFloor = groundFloor;
     }
 
+    /**
+     * Executes the instructions given in input instruction file.
+     */
     public void execute(){
-        readInstructionFile("input.txt");
+        readInstructionFile(INSTRUCTION_FILE);
         commands.forEach(command -> {
             List<Integer> seq = controller.calculateFloorPath(command);
-            StringBuilder builder = new StringBuilder();
-            seq.forEach(i -> {builder.append(i + " ");});
-            System.out.println(builder.toString() + "(" + controller.calculateDistance(seq) + ")");
+            displayFloorPathAndTotalDistance(seq);
         });
     }
 
+    /**
+     * Reads and parse input instruction file and convert into commands.
+     *
+     * @param fileName instruction file
+     */
     public void readInstructionFile(String fileName){
         notNull(fileName);
         URL fileurl = ClassLoader.getSystemResource(fileName);
         notNull(fileurl);
 
-        try (Stream<String> stream = Files.lines(Paths.get(ClassLoader.getSystemResource(fileName).toURI()))) {
+        try (Stream<String> stream = Files.lines(Paths.get(fileurl.toURI()))) {
             List<String> rawCommands = new ArrayList<>();
             stream.collect(Collectors.toCollection(() -> rawCommands));
             commands = rawCommands.stream().map(rawCommand -> new Command(rawCommand)).collect(Collectors.toList());
@@ -68,4 +76,18 @@ public class Elevator {
     public int getGroundFloor() {
         return groundFloor;
     }
+
+    /**
+     * display floor path and distance.
+     *
+     * @param seq elevator flow sequence
+     */
+    private void displayFloorPathAndTotalDistance(List<Integer> seq) {
+        StringBuilder builder = new StringBuilder();
+        seq.forEach(i -> {
+            builder.append(i + " ");
+        });
+        System.out.println(builder.toString() + "(" + controller.calculateDistance(seq) + ")");
+    }
+
 }
