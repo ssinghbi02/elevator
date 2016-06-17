@@ -1,8 +1,8 @@
 
 ## Synopsis
 
-The Elevator reads in raw instructions from file and to create a list of Command objects. Elevator has a controller which interpret raw command and provides sequence of instruction which elevator can understand. Elevator takes controller when instantiated. 
-There are two type of controller which embed algorithm to compute path logic and elevator then displays path and distance.
+The Elevator reads in raw instructions from file within classpath and to create a list of Command objects. Elevator has a dependency controller which interpret raw command and provides sequence of instruction which elevator can understand. Elevator takes controller when instantiated. 
+There are two type of controller (modeA and modeB) which embed algorithm to compute path logic and then elevator displays path and distance.
 
 ## Code Example
 
