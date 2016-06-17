@@ -42,7 +42,7 @@ public class Elevator {
         readInstructionFile(INSTRUCTION_FILE);
         commands.forEach(command -> {
             List<Integer> seq = controller.calculateFloorPath(command);
-            displayFloorPathAndTotalDistance(seq);
+            processFloorSequence(seq);
         });
     }
 
@@ -82,7 +82,7 @@ public class Elevator {
      *
      * @param seq elevator flow sequence
      */
-    private void displayFloorPathAndTotalDistance(List<Integer> seq) {
+    private void processFloorSequence(List<Integer> seq) {
         StringBuilder builder = new StringBuilder();
         seq.forEach(i -> {
             builder.append(i + " ");
