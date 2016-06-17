@@ -1,5 +1,5 @@
-# elevator
-Elevator ## Synopsis
+
+## Synopsis
 
 The Elevator reads in raw instructions from file and to create a list of Command objects. Elevator has a controller which interpret raw command and provides sequence of instruction which elevator can understand. Elevator takes controller when instantiated. 
 There are two type of controller which embed algorithm to compute path logic and elevator then displays path and distance.
@@ -10,9 +10,7 @@ There are two type of controller which embed algorithm to compute path logic and
 
 ## Installation
 
-I am using maven 3 for depedency and build configuration. build artifact (jar) published in target folder. you can run the application from 
-jar file (java -jar <artifact-name>.jar). you can also run from any IDE (eclipse or intellij) by running App.java. This takes instruction file 
-from classpath: current location is src\main\resources\input.txt.
+I am using maven 3 for depedency and build configuration. build artifact (jar) published in target folder. you can run the application from jar file (java -jar elevator.jar). you can also run from any IDE (eclipse or intellij) by running App.java. This takes instruction file from classpath: current location is src\main\resources\input.txt .
 
 Once you run App.java output will be printed on console:
 
