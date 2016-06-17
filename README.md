@@ -16,7 +16,7 @@ Once you run App.java output will be printed on console:
 
 Output:
 
-Elevator in mode A
+'Elevator in mode A
 10 8 1 (9)
 9 1 5 1 6 1 5 (30)
 2 4 1 4 2 6 8 (16)
@@ -29,7 +29,7 @@ Elevator in mode B
 2 4 2 1 6 8 (12)
 3 5 7 8 9 11 1 (18)
 7 11 10 6 5 6 8 12 7 4 8 9 (30)
-6 1 6 8 (12)
+6 1 6 8 (12)'
 
 
 
