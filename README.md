@@ -6,7 +6,7 @@ There are two type of controller (modeA and modeB) which embed algorithm to comp
 
 ## Code Example
 
-
+[diagram]: https://github.com/ssinghbi02/elevator/raw/master/diagram.png "Class Diagram"
 
 ## Installation
 
