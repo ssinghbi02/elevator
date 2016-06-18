@@ -10,7 +10,7 @@ There are two type of controller (modeA and modeB) which embed algorithm to comp
 
 ## Installation
 
-I am using maven 3 for depedency and build configuration. build artifact (jar) published in target folder. you can run the application from jar file (java -jar elevator.jar). you can also run from any IDE (eclipse or intellij) by running App.java. This takes instruction file from classpath: current location is src\main\resources\input.txt .
+I am using Java 8 for development and maven 3 for depedency and build configuration. build artifact (jar) published in target folder. you can run the application from jar file (java -jar elevator.jar). you can also run from any IDE (eclipse or intellij) by running App.java. This takes instruction file from classpath: current location is src\main\resources\input.txt .
 
 Once you run App.java output will be printed on console:
 
