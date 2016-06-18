@@ -5,7 +5,7 @@ The Elevator reads in raw instructions from file within classpath and to create 
 There are two type of controller (modeA and modeB) which embed algorithm to compute path logic and then elevator displays path and distance.
 
 ## Code Example
-
+![alt text][diagram]
 [diagram]: https://github.com/ssinghbi02/elevator/raw/master/diagram.png "Class Diagram"
 
 ## Installation
