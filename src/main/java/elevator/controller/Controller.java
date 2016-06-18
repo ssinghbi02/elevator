@@ -15,7 +15,7 @@ public interface Controller {
      * Compute floor path for given command.
      *
      * @param command command input
-     * @return floor path sequence
+     * @return {@link List} floor path sequence
      */
     List<Integer> calculateFloorPath(final Command command);
 
@@ -23,7 +23,7 @@ public interface Controller {
      * Computes the distance for given floor path.
      *
      * @param floorPath sequence of floor numbers.
-     * @return distance
+     * @return {@link Integer} distance
      */
     Integer calculateDistance(List<Integer> floorPath);
 }

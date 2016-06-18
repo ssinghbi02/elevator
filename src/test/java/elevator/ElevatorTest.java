@@ -2,6 +2,7 @@ package elevator;
 
 import elevator.command.Command;
 import elevator.controller.Controller;
+import elevator.exception.CommandException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by ssinghbi02 on 16/06/2016.
+ * Test class for {@link Elevator}
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ElevatorTest {
@@ -26,7 +27,7 @@ public class ElevatorTest {
 
     @Before
     public void setUp() {
-        elevator = new Elevator(controller, 12, 0);
+        elevator = new Elevator(controller, 12);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -35,15 +36,21 @@ public class ElevatorTest {
     }
 
     @Test
-    public void testReadInstructionsIfInstructionsAreCorrect() {
-        elevator.readInstructionFile("test_valid.txt");
-        assertThat(elevator.getCommands().size(), is(6));
-    }
-
-    @Test
     public void testExecuteIfInstructionsAreCorrect() {
         elevator.execute();
         Mockito.verify(controller, Mockito.times(6)).calculateFloorPath(Mockito.any(Command.class));
         Mockito.verify(controller, Mockito.times(6)).calculateDistance(Mockito.any(List.class));
     }
+
+    @Test(expected = CommandException.class)
+    public void testThrowExceptionIfInstructionsAreInCorrect() {
+        elevator.readInstructionFile("test_invalid.txt");
+    }
+
+    @Test
+    public void testReadInstructionsIfInstructionsAreCorrect() {
+        elevator.readInstructionFile("test_valid.txt");
+        assertThat(elevator.getCommands().size(), is(6));
+    }
+
 }

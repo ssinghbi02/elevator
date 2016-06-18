@@ -2,24 +2,23 @@ package elevator.controller;
 
 import elevator.command.Command;
 import elevator.command.Path;
-import elevator.controller.Controller;
-import elevator.controller.ModeAController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.equalTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+
 /**
- * Created by ssinghbi02 on 16/06/2016.
+ * Test class for {@link ModeAController}
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ModeAControllerTest {
@@ -61,11 +60,9 @@ public class ModeAControllerTest {
     }
 
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void testCalculateDistanceIfFloorPathIsEmpty() {
         Integer distance = controller.calculateDistance(Arrays.asList());
-        assertThat(distance, is(0));
-
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -81,7 +78,7 @@ public class ModeAControllerTest {
 
     @Test
     public void testCalculateDistance() {
-        Integer distance = controller.calculateDistance(Arrays.asList(9,5,3,2,1));
+        Integer distance = controller.calculateDistance(Arrays.asList(9, 5, 3, 2, 1));
         assertThat(distance, is(8));
     }
 }

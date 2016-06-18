@@ -2,7 +2,7 @@ package elevator.controller;
 
 import elevator.command.Command;
 import elevator.command.Path;
-import elevator.controller.Controller;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class ModeAController implements Controller {
     public List<Integer> calculateFloorPath(Command command) {
         List<Integer> sequence = new ArrayList<>();
         sequence.add(command.getInitialFloor());
-        Path current = null;
+        Path current;
         Path previous = null;
         for (Path path : command.getPaths()) {
             current = path;
@@ -39,9 +39,8 @@ public class ModeAController implements Controller {
      * {@inheritDoc}
      */
     public Integer calculateDistance(List<Integer> floorPath) {
-        if (floorPath == null) {
-            throw new IllegalArgumentException("floor path is null");
-        }
+        Assert.notEmpty(floorPath);
+
         Integer distance = 0;
         Integer previousFloorNo = null;
         for (Integer floorNo : floorPath) {

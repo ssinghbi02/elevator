@@ -1,6 +1,8 @@
 package elevator.command;
 
 
+import elevator.exception.CommandException;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,8 +12,8 @@ import java.util.stream.Collectors;
  *
  */
 public class Command {
-    private List<Path> paths;
     private final String rawCommand;
+    private List<Path> paths;
     private Integer initialFloor;
 
     /**
@@ -53,19 +55,20 @@ public class Command {
     private void validate(String rawCommand) {
         int index = rawCommand.indexOf(":");
         if (index == -1) {
-            throw new IllegalArgumentException("Initial floor should be delimited by ':' ");
+            throw new CommandException("Initial floor should be delimited by ':' ");
         }
         String[] tokens = rawCommand.split(":");
         Arrays.asList(tokens[1].split(","))
                 .forEach(token -> {
                     String[] paths = token.split("-");
                     if (paths.length != 2)
-                        throw new IllegalArgumentException("Given path command is invalid");
+                        throw new CommandException("Given path command is invalid");
+
                     try {
                         Integer.valueOf(paths[0]);
                         Integer.valueOf(paths[1]);
                     } catch (NumberFormatException ex) {
-                        throw new IllegalArgumentException("input command is invalid");
+                        throw new CommandException("input command is invalid");
                     }
                 });
     }

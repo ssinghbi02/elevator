@@ -1,41 +1,39 @@
 package elevator.command;
 
-import elevator.command.Command;
+import elevator.exception.CommandException;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * Created by ssinghbi02 on 16/06/2016.
+ * Test class for {@code Command}
  */
 public class CommandTest {
 
-    private Command command;
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testParseRawCommandIfCommandIsInvalid1(){
-        command = new Command("2,4-1,4-2,6-8");
+    @Test(expected = CommandException.class)
+    public void testParseRawCommandIfCommandIsInvalidScenario1() {
+        Command command = new Command("2,4-1,4-2,6-8");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testParseRawCommandIfCommandIsInvalid2(){
-        command = new Command("2:4-1,4-2,6-");
+    @Test(expected = CommandException.class)
+    public void testParseRawCommandIfCommandIsInvalidScenario2() {
+        Command command = new Command("2:4-1,4-2,6-");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testParseRawCommandIfCommandIsInvalid3(){
-        command = new Command("2:4-1,4-2,6");
+    @Test(expected = CommandException.class)
+    public void testParseRawCommandIfCommandIsInvalidScenario3() {
+        Command command = new Command("2:4-1,4-2,6");
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testParseRawCommandIfCommandIsInvalid4(){
-        command = new Command("2:4-1,4,2");
+    @Test(expected = CommandException.class)
+    public void testParseRawCommandIfCommandIsInvalidScenario4() {
+        Command command = new Command("2:4-1,4,2");
     }
 
     @Test
     public void testParseRawCommandIfCommandIsValid() {
-        command = new Command("2:4-1,4-2");
+        Command command = new Command("2:4-1,4-2");
         assertThat(command.getPaths().size(), is(2));
         assertThat(command.getInitialFloor(), is(2));
 

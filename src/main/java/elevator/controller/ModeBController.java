@@ -3,7 +3,7 @@ package elevator.controller;
 import elevator.command.Command;
 import elevator.command.Direction;
 import elevator.command.Path;
-import elevator.controller.Controller;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class ModeBController implements Controller {
         sequence.add(command.getInitialFloor());
         List<Path> upQueue = new ArrayList<>();
         List<Path> downQueue = new ArrayList<>();
-        Path current = null;
+        Path current;
         Path previous = null;
         for(Path path : command.getPaths()) {
             current = path;
@@ -52,9 +52,7 @@ public class ModeBController implements Controller {
      * {@inheritDoc}
      */
     public Integer calculateDistance(List<Integer> floorPath) {
-        if(floorPath == null) {
-            throw new IllegalArgumentException("floor path is null");
-        }
+        Assert.notEmpty(floorPath);
         Integer distance = 0;
         Integer previousFloorNo = null;
         for(Integer floorNo : floorPath) {
@@ -83,7 +81,7 @@ public class ModeBController implements Controller {
             seq.add(command.getEndFloor());
         }
         Integer firstElement = seq.iterator().next();
-        if( sequence.size() > 0 && sequence.get(sequence.size() - 1) == seq.iterator().next()) {
+        if (sequence.size() > 0 && sequence.get(sequence.size() - 1).equals(seq.iterator().next())) {
             seq.remove(firstElement);
         }
         sequence.addAll(seq);
