@@ -65,8 +65,11 @@ public class Command {
                         throw new CommandException("Given path command is invalid");
 
                     try {
-                        Integer.valueOf(paths[0]);
-                        Integer.valueOf(paths[1]);
+                        Integer startFloor = Integer.valueOf(paths[0]);
+                        Integer endFloor = Integer.valueOf(paths[1]);
+                        if (startFloor < 0 || endFloor < 0) {
+                            throw new CommandException("start or end floor is negative");
+                        }
                     } catch (NumberFormatException ex) {
                         throw new CommandException("input command is invalid");
                     }

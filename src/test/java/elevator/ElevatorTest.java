@@ -35,16 +35,21 @@ public class ElevatorTest {
         elevator.readInstructionFile("non_exists_file.txt");
     }
 
-    @Test
-    public void testExecuteIfInstructionsAreCorrect() {
-        elevator.execute();
-        Mockito.verify(controller, Mockito.times(6)).calculateFloorPath(Mockito.any(Command.class));
-        Mockito.verify(controller, Mockito.times(6)).calculateDistance(Mockito.any(List.class));
+    @Test(expected = IllegalArgumentException.class)
+    public void testElevatorIfMaxFloorIsNegativeOrZero() {
+        elevator = new Elevator(controller, -2);
     }
 
     @Test(expected = CommandException.class)
     public void testThrowExceptionIfInstructionsAreInCorrect() {
         elevator.readInstructionFile("test_invalid.txt");
+    }
+
+    @Test
+    public void testExecuteIfInstructionsAreCorrect() {
+        elevator.execute();
+        Mockito.verify(controller, Mockito.times(6)).calculateFloorPath(Mockito.any(Command.class));
+        Mockito.verify(controller, Mockito.times(6)).calculateDistance(Mockito.any(List.class));
     }
 
     @Test

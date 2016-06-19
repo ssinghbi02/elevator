@@ -31,6 +31,12 @@ public class CommandTest {
         Command command = new Command("2:4-1,4,2");
     }
 
+    @Test(expected = CommandException.class)
+    public void testParseRawCommandIfCommandIsInvalidScenario5() {
+        Command command = new Command("2:4-1,5-2,-3-2");
+    }
+
+
     @Test
     public void testParseRawCommandIfCommandIsValid() {
         Command command = new Command("2:4-1,4-2");
