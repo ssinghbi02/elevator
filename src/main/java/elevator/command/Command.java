@@ -73,4 +73,33 @@ public class Command {
                 });
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Command command = (Command) o;
+
+        if (!rawCommand.equals(command.rawCommand)) return false;
+        if (!getPaths().equals(command.getPaths())) return false;
+        return getInitialFloor().equals(command.getInitialFloor());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rawCommand.hashCode();
+        result = 31 * result + getPaths().hashCode();
+        result = 31 * result + getInitialFloor().hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Command{" +
+                "rawCommand='" + rawCommand + '\'' +
+                ", paths=" + paths +
+                ", initialFloor=" + initialFloor +
+                '}';
+    }
 }
